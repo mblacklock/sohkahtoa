@@ -1,0 +1,22 @@
+<ul>
+	{% if topic_list %}
+		{% for t in topic_list %}
+			{% if t == act_topic %}
+				<li>
+					<strong><a href="{% url 'topics:show_subtopic' t.slug %}">{{ t.name }}</a></strong>
+				</li>
+			{% else %}
+				<li>
+					{% if search == True %}
+						<a href="{% url 'topics:show_subtopic' t.slug %}">Year {{ t.topic.year.year }} - {{ t.topic.name }} - {{ t.name }}</a>
+					{% else %}
+						<a href="{% url 'topics:show_subtopic' t.slug %}">{{ t.name }}</a>
+					{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<li><strong>There are no subtopics matching your request.</strong></li>
+	{% endif %}
+</ul>
+	

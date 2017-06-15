@@ -1,0 +1,24 @@
+{% extends 'topics/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	Topic List
+{% endblock %}
+
+{% block body_block %}
+	<div>
+		<ul>
+			<li>Type to find a subtopic:</li>
+			<br/>
+			<form>
+				<li><input type="text"
+						name="suggestion" value="" id="suggestion" />
+				</li>
+			</form>
+		</ul>
+	</div>
+	<div id="search-list"></div>
+	<br/>
+	<img src="{% static "topics/images/rango.jpg" %}"
+				alt="Rango" />
+{% endblock %}

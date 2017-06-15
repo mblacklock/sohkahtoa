@@ -1,0 +1,5 @@
+Activate account at sohkahtoa.com {% comment %}Replace with site.name, when international{% endcomment %}
+
+http://www.sohkahtoa.com/{% url 'registration_activate' activation_key %}
+
+Link is valid for {{ expiration_days }} days.
