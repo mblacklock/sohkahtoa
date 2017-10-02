@@ -10,7 +10,11 @@ from quiz.models import Question, Score, SubtopicQuiz, TopicQuiz #Answer,
 class QuestionAdmin(admin.ModelAdmin):
     model = Question
     prepopulated_fields = {'slug':('name',)}
-    list_display = ('id', 'name', 'slug', 'get_subtopics', 'level', 'instances', 'is_active')
+    list_display = ('id', 'name', 'slug', 'subtopic', 'get_topic', 'level', 'instances', 'is_active')
+
+    def get_topic(self, obj):
+        return obj.subtopic.topic.name
+    get_topic.short_description = 'Topic'
 
 class ScoreAdmin(admin.ModelAdmin):
     model = Score

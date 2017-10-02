@@ -33,6 +33,8 @@ class Subtopic(models.Model):
     slug = models.SlugField(unique=True)
     video_url = models.URLField()
     is_active = models.BooleanField(default=True)
+    is_quiz = models.BooleanField(default=False)
+    is_real = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load topics_template_tags %}
+
+{% block title_block %}
+	{% if topic %}
+		{{ topic.name }} - Targets
+	{% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+	{% if topic %}
+	
+		{% if scores %}
+			<ul>
+				{% for s in scores %}
+					<li>{{ s.subtopic.name }} - Score = {{ s.score }}</li>
+				{% endfor %}
+			</ul>
+			<ul>
+				{% for s in averages %}
+					<li>{{ s.subtopic.name }} - Average Score = {{ s.average_score }}</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			No scores found
+		{% endif %}
+		
+				
+		
+	{% else %}
+		Topic not found
+	{% endif %}	
+	
+{% endblock %}
+
+{% block js %}
+	{{ block.super }}
+{% endblock %}

@@ -3,7 +3,13 @@
 {% load topics_template_tags %}
 
 {% block title_block %}
-	{{ subtopic.name }} - {{ subtopic.topic.name }}
+	{% if subtopic %}
+		{% if subtopic.is_quiz %}
+			{{ subtopic.topic.name }} - Topic Quiz
+		{% else %}
+			{{ subtopic.name }} - {{ subtopic.topic.name }}
+		{% endif %}
+	{% endif %}
 {% endblock %}
 
 {% block sidebar_block %}
@@ -12,11 +18,13 @@
 
 {% block body_block %}
 	{% if subtopic %}
-		<h1 id="subtopic-title" data-subtopic="{{ subtopic.name }}">{{ subtopic.name }}</h1>
-		<video width="320" height="240" controls>
-		  <source src="{% static VIDEO_LINK|safe %}" type="video/mp4">
-		Your browser does not support the video tag.
-		</video>
+		<h1 id="subtopic-title" data-subtopic="{{ subtopic.name }}" data-topicQuiz="{{ subtopic.is_quiz }}" data-realWorld="{{ subtopic.is_real }}">{{ subtopic.name }}</h1>
+		{% if not subtopic.is_quiz %}
+			<video width="320" height="240" controls>
+				<source src="{% static VIDEO_LINK|safe %}" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+		{% endif %}
 	{% else %}
 		Subtopic by that name not found
 	{% endif %}
@@ -27,25 +35,28 @@
 		<div class="panel panel-default col-xs-offset-1 col-xs-6">
 			<div class="panel-body">
 				<div class="row">
-					<h2>Quick Quiz</h2>
+					{% if subtopic.is_quiz %}
+						<h2>Topic Quiz</h2>
+					{% else %}
+						<h2>Quick Quiz</h2>
+					{% endif %}
+				</div>
+				<div id="level-text" class="row">
 				</div>
 				<div id="question_title" class="row">
 				</div>
-				<div id="question_text" class="row text-center">
+				<div id="question-text" class="row text-center">
 				</div>
 				<div class="row">
-					<div id="answer_box" class="col-xs-offset-4 col-xs-4 vcenter">
-						<label for="answer">Answer:</label>
-						<input class="form-control" id="answer" type="text">
+					<div id="answer-box" class="col-xs-offset-4 col-xs-4 vcenter">
 					</div>
 				</div>
 				<div class="row">
-					<div id="question_number" class="col-xs-5 vcenter">
+					<div id="out-of" class="col-xs-5 vcenter">
 					</div>
 					<!--
 					-->
-					<div class="col-xs-offset-4 col-xs-3 vcenter">
-						<button id="next_question" class="btn btn-primary">Next Question</button>
+					<div id="button" class="col-xs-offset-4 col-xs-3 vcenter">
 					</div>
 				</div>
 			</div>
@@ -53,9 +64,9 @@
 	</div>
 {% endblock %}
 {% block js %}
-		{{ block.super }}
-		<script src="{% static 'quiz/js/js.cookie.js' %}"></script>
-		<script src="{% static 'quiz/js/quiz-ajax.js' %}"></script>
-		<script src="{% static 'quiz/js/quiz-jquery.js' %}"></script>
-		<script src="{% static 'quiz/js/quiz-questions.js' %}"></script>
+	{{ block.super }}
+	<script src="{% static 'quiz/js/js.cookie.js' %}"></script>
+	<script src="{% static 'quiz/js/quiz-ajax.js' %}"></script>
+	<script src="{% static 'quiz/js/quiz-jquery.js' %}"></script>
+	<script src="{% static 'quiz/js/quiz-questions.js' %}"></script>
 {% endblock %}

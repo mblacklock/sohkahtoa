@@ -23,7 +23,6 @@ def get_topic_list(year=None, topic=None):
 
 @register.inclusion_tag('topics/subtopic_list.html')
 def get_subtopic_list(subtopic=None):
-    print(subtopic)
     subtopic_list = []
     if subtopic:
         try:

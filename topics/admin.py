@@ -34,7 +34,7 @@ class TopicAdmin(admin.ModelAdmin):
 class SubtopicAdmin(admin.ModelAdmin):
     model = Subtopic
     prepopulated_fields = {'slug':('name',)}
-    fields = ('name', 'slug', 'topic')
+    fields = ('name', 'slug', 'topic', 'is_active', 'is_quiz', 'is_real')
     list_display = fields
     search_fields = ['name']
 

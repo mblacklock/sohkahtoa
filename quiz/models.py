@@ -29,7 +29,7 @@ class TopicQuiz(models.Model):
         return str(self.topic.name)
 
 class Question(models.Model):
-    subtopic = models.ManyToManyField(Subtopic)
+    subtopic = models.ForeignKey(Subtopic)
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(unique=True)
     level = models.IntegerField(blank=False, default=1)
@@ -39,11 +39,6 @@ class Question(models.Model):
     def save(self, *args, **kwargs):
         self.slug = self.name.replace(" ", "_").lower()
         super(Question, self).save(*args, **kwargs)
-
-    def get_subtopics(self):
-        return "\n".join([s.name for s in self.subtopic.all()])
-    get_subtopics.short_description = 'Subtopics'
-    #get_subtopics.admin_order_field = 'subtopic'
 
     def __str__(self):
         return str(self.name)

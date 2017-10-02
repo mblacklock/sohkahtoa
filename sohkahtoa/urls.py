@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^topics/', include('topics.urls')),
     url(r'^quiz/', include('quiz.urls')),
+    url(r'^targets/', include('targets.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')), ## change to default before launch
     ]

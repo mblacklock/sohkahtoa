@@ -11,3 +11,11 @@ function adding_whole_numbers() {
 function adding_decimals() {
 	adding_whole_numbers()
 }
+
+function subtracting_whole_numbers() {
+	adding_whole_numbers()
+}
+
+function real_whole_numbers() {
+	adding_whole_numbers()
+}
